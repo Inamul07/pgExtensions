@@ -1,0 +1,5 @@
+# char_count extension
+comment = 'Function to count number of specified character in a string'
+default_version = '1.0'
+module_pathname = '$libdir/char_count'
+relocatable = true

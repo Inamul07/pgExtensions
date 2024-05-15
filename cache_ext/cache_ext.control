@@ -1,0 +1,5 @@
+# cache_ext extension
+comment = 'Implementations of cache replacement algorithms'
+default_version = '1.0'
+module_pathname = '$libdir/cache_ext'
+relocatable = true

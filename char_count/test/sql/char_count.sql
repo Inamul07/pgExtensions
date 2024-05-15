@@ -1,0 +1,13 @@
+CREATE EXTENSION char_count;
+SELECT char_count('aaaabbbbbbbcc','a');
+SELECT char_count('aaaabbbbbbbcc','b');
+SELECT char_count('aaaabbbbbbbcc','c');
+SELECT char_count('aaaabbbbbbbcc1111222222233333335555590','x');
+SELECT char_count('aaaabbbbbbbcc1111222222233333335555590','c');
+SELECT char_count('aaaabbbbbbbcc1111222222233333335555590','b');
+SELECT char_count('aaaabbbbbbbcc1111222222233333335555590','5');
+SELECT char_count('aaaabbbbbbbcc1111222222233333335555590','3');
+SELECT char_count('aaaabbbbbbbcc1111222222233333335555590','2');
+SELECT char_count('aaaabbbbbbbcc1111222222233333335555590','1');
+SELECT char_count('aaaabbbbbbbcc1111222222233333335555590','0');
+SELECT char_count('aaaabbbbbbbcc1111222222233333335555590','asd');

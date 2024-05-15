@@ -1,0 +1,77 @@
+-- simple input
+SELECT '120'::bigbase36;
+ bigbase36 
+-----------
+ 120
+(1 row)
+
+SELECT '3c'::bigbase36;
+ bigbase36 
+-----------
+ 3c
+(1 row)
+
+-- case insensitivity
+SELECT '3C'::bigbase36;
+ bigbase36 
+-----------
+ 3c
+(1 row)
+
+SELECT 'FoO'::bigbase36;
+ bigbase36 
+-----------
+ foo
+(1 row)
+
+-- invalid characters
+SELECT 'foo bar'::bigbase36;
+ERROR:  Invalid input syntax for base36: foo bar
+LINE 1: SELECT 'foo bar'::bigbase36;
+               ^
+SELECT 'abc$%2'::bigbase36;
+ERROR:  Invalid input syntax for base36: abc$%2
+LINE 1: SELECT 'abc$%2'::bigbase36;
+               ^
+-- negative values
+SELECT '-10'::bigbase36;
+ERROR:  Value -36 is negative. Give positive values
+LINE 1: SELECT '-10'::bigbase36;
+               ^
+-- to big values
+SELECT 'abcdefghijklmn'::bigbase36;
+ERROR:  base36 out of range.
+LINE 1: SELECT 'abcdefghijklmn'::bigbase36;
+               ^
+-- storage
+BEGIN;
+CREATE TABLE base36_test(val bigbase36);
+INSERT INTO base36_test VALUES ('123'), ('3c'), ('5A'), ('zZz');
+SELECT * FROM base36_test;
+ val 
+-----
+ 123
+ 3c
+ 5a
+ zzz
+(4 rows)
+
+UPDATE base36_test SET val = '567a' where val = '123';
+SELECT * FROM base36_test;
+ val  
+------
+ 3c
+ 5a
+ zzz
+ 567a
+(4 rows)
+
+UPDATE base36_test SET val = '-aa' where val = '3c';
+ERROR:  Value -370 is negative. Give positive values
+LINE 1: UPDATE base36_test SET val = '-aa' where val = '3c';
+                                     ^
+SELECT * FROM base36_test;
+ERROR:  current transaction is aborted, commands ignored until end of transaction block
+DROP TABLE base36_test;
+ERROR:  current transaction is aborted, commands ignored until end of transaction block
+ROLLBACK;

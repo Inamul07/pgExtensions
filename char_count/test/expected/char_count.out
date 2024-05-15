@@ -1,0 +1,70 @@
+CREATE EXTENSION char_count;
+SELECT char_count('aaaabbbbbbbcc','a');
+ char_count 
+------------
+          4
+(1 row)
+
+SELECT char_count('aaaabbbbbbbcc','b');
+ char_count 
+------------
+          7
+(1 row)
+
+SELECT char_count('aaaabbbbbbbcc','c');
+ char_count 
+------------
+          2
+(1 row)
+
+SELECT char_count('aaaabbbbbbbcc1111222222233333335555590','x');
+ char_count 
+------------
+          0
+(1 row)
+
+SELECT char_count('aaaabbbbbbbcc1111222222233333335555590','c');
+ char_count 
+------------
+          2
+(1 row)
+
+SELECT char_count('aaaabbbbbbbcc1111222222233333335555590','b');
+ char_count 
+------------
+          7
+(1 row)
+
+SELECT char_count('aaaabbbbbbbcc1111222222233333335555590','5');
+ char_count 
+------------
+          5
+(1 row)
+
+SELECT char_count('aaaabbbbbbbcc1111222222233333335555590','3');
+ char_count 
+------------
+          7
+(1 row)
+
+SELECT char_count('aaaabbbbbbbcc1111222222233333335555590','2');
+ char_count 
+------------
+          7
+(1 row)
+
+SELECT char_count('aaaabbbbbbbcc1111222222233333335555590','1');
+ char_count 
+------------
+          4
+(1 row)
+
+SELECT char_count('aaaabbbbbbbcc1111222222233333335555590','0');
+ char_count 
+------------
+          1
+(1 row)
+
+SELECT char_count('aaaabbbbbbbcc1111222222233333335555590','asd');
+ERROR:  value too long for type character(1)
+CONTEXT:  PL/pgSQL function char_count(text,character) line 7 during statement block local variable initialization
